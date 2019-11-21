@@ -4,6 +4,8 @@ package config;
         import org.openqa.selenium.chrome.ChromeDriver;
         import org.openqa.selenium.chrome.ChromeOptions;
         import pages.Home;
+        import pages.Welcome;
+        import pages.Register;
 
 public class Base {
     //private static WebDriver driver;
@@ -12,9 +14,22 @@ public class Base {
     public static void main(String[] args) throws InterruptedException {
         driver = GetDriver("Chrome", false);
         driver.manage().window().maximize();
-        driver.get("https://google.com");
+        driver.get("https://staging.engineer.ai/home");
 
         Home home = new Home(driver);
+        Welcome welcome = new Welcome(driver);
+        Register register = new Register(driver);
+
+        home.TakeTourPopUp();
+        welcome.SkipButton();
+        home.PopUpPromoClose();
+        home.SelectCurrency("USD");
+        home.RegisterClient();
+        register.SetEmail("testsergio@gmail.com");
+        register.ClickNextEmail();
+        register.SetPasssword("ABCdef123.");
+
+
         //Closing the browser
         driver.close();
     }

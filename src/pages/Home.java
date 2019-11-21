@@ -8,16 +8,42 @@ public class Home {
     WebDriver driver;
 
 
-    By SearchButton = By.xpath("//div[@class='search']/div/button");
+    By TakeTour = By.xpath("//div[@class='welcomesection']/div/button");
+    By PopUpPromo = By.xpath("//span[@class='icon-cancel']/button");
+    By DropDownCurrency = By.className("sel_state");
+    By RegisterBtn = By.xpath("//[@class='loginDropDown']//*[contains(text(),'Register'");
 
     public Home(WebDriver driver) {
         this.driver = driver;
     }
 
-    public void SearchBox() {
-        WebElement button = driver.findElement(SearchButton);
+    public void TakeTourPopUp() {
+        WebElement button = driver.findElement(TakeTour);
         button.click();
     }
+
+
+    public void PopUpPromoClose() {
+        List<WebElement> popup = driver.findElements(PopUpPromo);
+        popup.get(1).click();
+    }
+
+
+    public void SelectCurrency(String currency) {
+        WebElement dropdown = driver.findElement(DropDownCurrency);
+        dropdown.click();
+
+        WebElement USD =  driver.findElement(By.xpath("//*[@class='currencyName'][text()='"+currency+"'])"));
+        USD.click();
+    }
+
+    public void RegisterClient () {
+        WebElement RegisterButton = driver.findElement(RegisterBtn);
+        RegisterButton.click();
+    }
+
+
+
 
 
 
